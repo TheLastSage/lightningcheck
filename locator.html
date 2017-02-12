@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      /* Optional: Makes the sample page fill the window. */
+      /*html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+*/
+      #checkIn {
+        margin: 0 auto;
+        margin-top: 20%;
+        width: 20%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="checkIn"></div>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+
+      function findSelf() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            // Change this when you figure out where to send the position.
+            // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
+            xhr.send();
+             
+            xhr.onreadystatechange = processRequest;
+             
+            function processRequest(e) {
+              if (xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById('checkIn').innerText = response["results"][0]["formatted_address"];
+              }
+            }
+          }, function() {
+            handleLocationError(true);
+          });
+        } else {
+          handleLocationError(false);
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation) {
+        alert(browserHasGeolocation);
+      }
+
+      findSelf();
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8ICIIQpZeAaablY62VWZg-poyOX4ytJQ&callback=initMap">
+    </script>
+  </body>
+</html>

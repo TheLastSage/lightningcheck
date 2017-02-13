@@ -25,9 +25,9 @@ class User(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  # users = db.session.query(User).all()
-  # return render_template('index.html', users=users)
-  return render_template('index.html')  
+  users = User.query.all()
+  return render_template('index.html', users=users)
+  # return render_template('index.html')  
 
 
 # @app.route('/user', methods=['POST'])
@@ -49,6 +49,6 @@ def checkin():
     return '', 204
 
 if __name__ == '__main__':
-  # db.create_all()
+  db.create_all()
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port, debug=True)

@@ -5,20 +5,20 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////tmp/flask_app.db')
+DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////tmp/flask_app.db')
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+db = SQLAlchemy(app)
 
 
-# class User(db.Model):
-#   id = db.Column(db.Integer, primary_key=True)
-#   name = db.Column(db.String(100))
-#   email = db.Column(db.String(100))
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(100))
+  email = db.Column(db.String(100))
 
-#   def __init__(self, name, email):
-#     self.name = name
-#     self.email = email
+  def __init__(self, name, email):
+    self.name = name
+    self.email = email
 
 
 @app.route('/', methods=['GET'])

@@ -15,8 +15,9 @@ class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100))
   email = db.Column(db.String(100))
+  location = db.Column(db.String(100))
 
-  def __init__(self, name, email):
+  def __init__(self, name, email, location):
     self.name = name
     self.email = email
 
@@ -33,6 +34,12 @@ def index():
 #   db.session.add(u)
 #   db.session.commit()
 #   return redirect(url_for('index'))
+
+@app.route('/checkin', methods=['POST'])
+def checkin():
+  u = User(request.form['name'], request.form['email'], request.form['location'])
+  db.session.add(u)
+  db.session.commit()
 
 if __name__ == '__main__':
   # db.create_all()

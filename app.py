@@ -35,7 +35,7 @@ def index():
 #   db.session.commit()
 #   return redirect(url_for('index'))
 
-@app.route('/checkin', methods=['POST'])
+@app.route('/checkin', methods=['PUT'])
 def checkin():
   u = User(request.form['name'], request.form['email'], request.form['location'])
   db.session.add(u)

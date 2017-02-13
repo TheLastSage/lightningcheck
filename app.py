@@ -20,13 +20,14 @@ class User(db.Model):
   def __init__(self, name, email, location):
     self.name = name
     self.email = email
+    self.location = locations
 
 
 @app.route('/', methods=['GET'])
 def index():
-  users = User.query.all()
+  users = db.session.query(User).all()
   # return render_template('index.html', users=users)
-  return render_template('index.html')
+  return render_template('index.html')  
 
 
 # @app.route('/user', methods=['POST'])

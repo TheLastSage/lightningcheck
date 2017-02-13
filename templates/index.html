@@ -26,42 +26,42 @@
   // failed.", it means you probably did not give permission for the browser to
   // locate you.
 
-  // function findSelf() {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(function(position) {
-  //       var pos = {
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude
-  //       };
+  function findSelf() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
 
-  //       // Change this when you figure out where to send the position.
-  //       // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
+        // Change this when you figure out where to send the position.
+        // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
 
-  //       var xhr = new XMLHttpRequest();
-  //       xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
-  //       xhr.send();
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
+        xhr.send();
          
-  //       xhr.onreadystatechange = processRequest;
+        xhr.onreadystatechange = processRequest;
          
-  //       function processRequest(e) {
-  //         if (xhr.status == 200) {
-  //           var response = JSON.parse(xhr.responseText);
-  //           document.getElementById('checkIn').innerText = response["results"][0]["formatted_address"];
-  //         }
-  //       }
-  //     }, function() {
-  //       handleLocationError(true);
-  //     });
-  //   } else {
-  //     handleLocationError(false);
-  //   }
-  // }
+        function processRequest(e) {
+          if (xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            document.getElementById('checkIn').innerText = response["results"][0]["formatted_address"];
+          }
+        }
+      }, function() {
+        handleLocationError(true);
+      });
+    } else {
+      handleLocationError(false);
+    }
+  }
 
-  // function handleLocationError(browserHasGeolocation) {
-  //   alert(browserHasGeolocation);
-  // }
+  function handleLocationError(browserHasGeolocation) {
+    alert(browserHasGeolocation);
+  }
 
-  // findSelf();
+  findSelf();
 
   // function sendLocation() {
   // 	var loc = document.getElementById('checkIn').textContent;

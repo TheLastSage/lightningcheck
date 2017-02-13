@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100))
-  email = db.Column(db.String(100))
+  email = db.Column(db.String(10  0))
   location = db.Column(db.String(100))
 
   def __init__(self, name, email, location):
@@ -52,9 +52,9 @@ def checkin():
 if __name__ == '__main__':
   # db.create_all()
   # db.session.commit()
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port, debug=True)
 
   user = User('test', 'email', 'testloc')
   db.session.add(user)
   db.session.commit()
-  port = int(os.environ.get('PORT', 5000))
-  app.run(host='0.0.0.0', port=port, debug=True)

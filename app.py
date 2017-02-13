@@ -24,7 +24,7 @@ class User(db.Model):
     self.location = location
 
   def __repr__(self):
-    return '<Name %r>' % self.name
+    return '<Name %r>' % self.location
 
 
 @app.route('/', methods=['GET'])
@@ -46,7 +46,8 @@ def checkin():
   if request.method == 'GET':
     return redirect(url_for('index'))
   elif request.method == 'POST':
-    u = User(request.form['name'], request.form['email'], request.form['location'])
+    # u = User(request.form['name'], request.form['email'], request.form['location'])
+    u = User(request.json['name'], request.json['email'], request.json['location'])
     # u = User("test" , "email", "please")
     db.session.add(u)
     db.session.commit()

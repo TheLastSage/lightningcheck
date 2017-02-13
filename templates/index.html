@@ -20,6 +20,7 @@
     <div id="checkIn">Not Set</div>
     <input type="button" onclick="findSelf()" value="Find Location" />
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
   // Note: This example requires that you consent to location sharing when
   // prompted by your browser. If you see the error "The Geolocation service
@@ -46,7 +47,24 @@
         function processRequest(e) {
           if (xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
-            document.getElementById('checkIn').innerText = response["results"][0]["formatted_address"];
+            var loc = response["results"][0]["formatted_address"];
+            document.getElementById('checkIn').innerText = loc;
+
+            data = {
+            	'name': 'test',
+            	'email': 'testemail',
+            	'location': loc
+            }
+
+            $.ajax({
+			    type : "POST",
+			    url : "../checkin",
+			    data: JSON.stringify(data, null, '\t'),
+			    contentType: 'application/json;charset=UTF-8',
+			    success: function(result) {
+			        document.getElementById("checkIn").innerText = "Sent " + loc;
+			    }
+			});
           }
         }
       }, function() {

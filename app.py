@@ -24,8 +24,9 @@ class User(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  # return render_template('index.html', users=User.query.all())
-  return render_template('index.html')
+  users = User.query.all()
+  return render_template('index.html', users=users)
+  # return render_template('index.html')
 
 
 # @app.route('/user', methods=['POST'])
@@ -41,10 +42,10 @@ def checkin():
     return redirect(url_for('index'))
   elif request.method == 'POST':
     u = User(request.args.get('name'), request.args.get('email'), request.args.get('location'))
-    # db.session.add(u)
-    # db.session.commit()
+    db.session.add(u)
+    db.session.commit()
     # return redirect(url_for('index'))
-    return 'success', 204
+    return '', 204
 
 if __name__ == '__main__':
   # db.create_all()

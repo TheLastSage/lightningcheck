@@ -35,11 +35,14 @@ def index():
 #   db.session.commit()
 #   return redirect(url_for('index'))
 
-@app.route('/checkin', methods=['PUT'])
+@app.route('/checkin', methods=['GET', 'PUT'])
 def checkin():
-  u = User(request.form['name'], request.form['email'], request.form['location'])
-  db.session.add(u)
-  db.session.commit()
+  if request.method == 'GET':
+    return redirect(url_for('index'))
+  elif request.method == 'PUT':
+    u = User(request.form['name'], request.form['email'], request.form['location'])
+    db.session.add(u)
+    db.session.commit()
   return redirect(url_for('index'))
 
 if __name__ == '__main__':

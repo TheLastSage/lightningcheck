@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
@@ -22,6 +22,9 @@ class User(db.Model):
     self.name = name
     self.email = email
     self.location = location
+
+  def __repr__(self):
+    return '<Name %r>' % self.name
 
 
 @app.route('/', methods=['GET'])
@@ -52,9 +55,9 @@ def checkin():
 if __name__ == '__main__':
   # db.create_all()
   # db.session.commit()
-  port = int(os.environ.get('PORT', 5000))
-  app.run(host='0.0.0.0', port=port, debug=True)
-
   user = User('test', 'email', 'testloc')
   db.session.add(user)
   db.session.commit()
+
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port, debug=True)

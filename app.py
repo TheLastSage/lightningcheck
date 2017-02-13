@@ -46,7 +46,8 @@ def checkin():
   if request.method == 'GET':
     return redirect(url_for('index'))
   elif request.method == 'POST':
-    u = User(request.args.get('name'), request.args.get('email'), request.args.get('location'))
+    # u = User(request.args.get('name'), request.args.get('email'), request.args.get('location'))
+    u = User("test", "email", "please")
     db.session.add(u)
     db.session.commit()
     # return redirect(url_for('index'))

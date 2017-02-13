@@ -43,8 +43,8 @@ def checkin():
     return redirect(url_for('index'))
   elif request.method == 'POST':
     u = User(request.args.get('name'), request.args.get('email'), request.args.get('location'))
-    db.session.add(u)
-    db.session.commit()
+    # db.session.add(u)
+    # db.session.commit()
     # return redirect(url_for('index'))
     return '', 204
 

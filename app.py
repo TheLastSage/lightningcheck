@@ -24,7 +24,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def index():
   # return render_template('index.html', users=User.query.all())
-  return "Hello World!"
+  return render_template('index.html')
 
 
 # @app.route('/user', methods=['POST'])

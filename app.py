@@ -46,18 +46,18 @@ def checkin():
   if request.method == 'GET':
     return redirect(url_for('index'))
   elif request.method == 'POST':
-    # u = User(request.args.get('name'), request.args.get('email'), request.args.get('location'))
-    # db.session.add(u)
-    # db.session.commit()
+    u = User(request.args.get('name'), request.args.get('email'), request.args.get('location'))
+    db.session.add(u)
+    db.session.commit()
     # return redirect(url_for('index'))
     return '', 204
 
 if __name__ == '__main__':
   # db.create_all()
   # db.session.commit()
-  u1 = User('test', 'email', 'testloc')
-  db.session.add(u1)
-  db.session.commit()
+  # u1 = User('test', 'email', 'testloc')
+  # db.session.add(u1)
+  # db.session.commit()
 
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port, debug=True)

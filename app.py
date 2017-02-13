@@ -25,7 +25,7 @@ class User(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  users = db.session.query(User).all()
+  # users = db.session.query(User).all()
   # return render_template('index.html', users=users)
   return render_template('index.html')  
 

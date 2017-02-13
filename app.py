@@ -29,7 +29,7 @@ class User(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  # users = User.query.all()
+  users = User.query.all()
   # return render_template('index.html', users=users)
   return render_template('index.html')  
 
@@ -55,8 +55,8 @@ def checkin():
 if __name__ == '__main__':
   # db.create_all()
   # db.session.commit()
-  user = User('test', 'email', 'testloc')
-  db.session.add(user)
+  u1 = User('test', 'email', 'testloc')
+  db.session.add(u1)
   db.session.commit()
 
   port = int(os.environ.get('PORT', 5000))

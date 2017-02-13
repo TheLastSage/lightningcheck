@@ -21,7 +21,7 @@ class User(db.Model):
   def __init__(self, name, email, location):
     self.name = name
     self.email = email
-    self.location = locations
+    self.location = location
 
 
 @app.route('/', methods=['GET'])

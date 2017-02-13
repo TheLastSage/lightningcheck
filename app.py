@@ -50,8 +50,8 @@ def checkin():
     return '', 204
 
 if __name__ == '__main__':
-  db.create_all()
-  db.session.commit()
+  # db.create_all()
+  # db.session.commit()
 
   user = User('test', 'email', 'testloc')
   db.session.add(user)

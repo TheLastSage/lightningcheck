@@ -15,9 +15,18 @@
     width: 20%;
     text-align: center;
   }
+
+  .hidden_div {
+  	visibility: hidden;
+  }
+
 </style>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <div class="center_stuff">
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<div id="info" class="hidden_div">
+		<div id="name"></div>
+		<div id="email"></div>
+	</div>
 	<a href="#" onclick="signOut();">Sign out</a>
     <div id="checkIn">Not Set</div>
     <input type="button" onclick="findSelf()" value="Find Location" />
@@ -90,6 +99,10 @@
 		console.log('Name: ' + profile.getName());
 		// console.log('Image URL: ' + profile.getImageUrl());
 		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+		document.getElementById("name").innerText = profile.getName();
+		document.getElementById("email").innerText = profile.getEmail();
+		document.getElementById("info").classList.remove("hidden_div");
 	}
 
 	function signOut() {
@@ -97,6 +110,8 @@
 		auth2.signOut().then(function () {
 		  console.log('User signed out.');
 		});
+
+		document.getElementById("info").classList.add("hidden_div");
 	}
 
 </script>

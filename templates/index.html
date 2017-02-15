@@ -17,76 +17,87 @@
   }
 </style>
 <div class="center_stuff">
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<a href="#" onclick="signOut();">Sign out</a>
     <div id="checkIn">Not Set</div>
     <input type="button" onclick="findSelf()" value="Find Location" />
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com">
 <script>
   // Note: This example requires that you consent to location sharing when
   // prompted by your browser. If you see the error "The Geolocation service
   // failed.", it means you probably did not give permission for the browser to
   // locate you.
 
-  function findSelf() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+	function findSelf() {
+		if (navigator.geolocation) {
+		  navigator.geolocation.getCurrentPosition(function(position) {
+		    var pos = {
+		      lat: position.coords.latitude,
+		      lng: position.coords.longitude
+		    };
 
-        // Change this when you figure out where to send the position.
-        // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
+		    // Change this when you figure out where to send the position.
+		    // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
-        xhr.send();
-         
-        xhr.onreadystatechange = processRequest;
-         
-        function processRequest(e) {
-          if (xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            var loc = response["results"][0]["formatted_address"];
-            document.getElementById('checkIn').innerText = loc;
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
+		    xhr.send();
+		     
+		    xhr.onreadystatechange = processRequest;
+		     
+		    function processRequest(e) {
+		      if (xhr.status == 200) {
+		        var response = JSON.parse(xhr.responseText);
+		        var loc = response["results"][0]["formatted_address"];
+		        document.getElementById('checkIn').innerText = loc;
 
-            data = {
-            	'name': 'test',
-            	'email': 'testemail',
-            	'location': loc
-            }
+		        data = {
+		        	'name': 'test',
+		        	'email': 'testemail',
+		        	'location': loc
+		        }
 
-            $.ajax({
-			    type : "POST",
-			    url : "../checkin",
-			    data: JSON.stringify(data, null, '\t'),
-			    contentType: 'application/json;charset=UTF-8',
-			    success: function(result) {
-			        document.getElementById("checkIn").innerText = "Sent " + loc;
-			        console.log("Sent!")
-			    }
-			});
-          }
-        }
-      }, function() {
-        handleLocationError(true);
-      });
-    } else {
-      handleLocationError(false);
-    }
-  }
+		        $.ajax({
+				    type : "POST",
+				    url : "../checkin",
+				    data: JSON.stringify(data, null, '\t'),
+				    contentType: 'application/json;charset=UTF-8',
+				    success: function(result) {
+				        document.getElementById("checkIn").innerText = "Sent " + loc;
+				        console.log("Sent!");
+				    }
+				});
+		      }
+		    }
+		  }, function() {
+		    handleLocationError(true);
+		  });
+		} else {
+		  handleLocationError(false);
+		}
+	}
 
-  function handleLocationError(browserHasGeolocation) {
-    alert(browserHasGeolocation);
-  }
+	function handleLocationError(browserHasGeolocation) {
+		alert(browserHasGeolocation);
+	}
 
-  // findSelf();
+	function onSignIn(googleUser) {
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		console.log('Name: ' + profile.getName());
+		// console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}
 
-  // function sendLocation() {
-  // 	var loc = document.getElementById('checkIn').textContent;
-  // 	// alert(loc);
-  // }
-  
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+		  console.log('User signed out.');
+		});
+	}
 
 </script>
 <script async defer

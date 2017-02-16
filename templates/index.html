@@ -69,21 +69,21 @@
 					        data = {
 					        	'location': loc,
 					        	'idtoken': prof_id
-					        }
+					        };
 			
-					  //       $.ajax({
-							//     type : "POST",
-							//     url : "../checkin",
-							//     data: JSON.stringify(data, null, '\t'),
-							//     contentType: 'application/json;charset=UTF-8',
-							//     success: function(result) {
-							//         document.getElementById("checkIn").innerText = "Sent " + loc;
-							//         console.log("Sent!");
-							//     },
-							//     complete: function(response) {
-							//     	console.log(response.responseText);
-							//     }
-							// });
+					        $.ajax({
+							    type : "POST",
+							    url : "../checkin",
+							    data: JSON.stringify(data, null, '\t'),
+							    contentType: 'application/json;charset=UTF-8',
+							    success: function(result) {
+							        document.getElementById("checkIn").innerText = "Sent " + loc;
+							        console.log("Sent!");
+							    },
+							    complete: function(response) {
+							    	console.log(response.responseText);
+							    }
+							});
 				    	}
 				    }
 				}, function() {

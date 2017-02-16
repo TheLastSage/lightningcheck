@@ -59,35 +59,31 @@
 				    xhr.send();
 
 				    xhr.onreadystatechange = processRequest;
-
-			    	console.log("outside");
-
 				     
 				    function processRequest(e) {
 				    	if (xhr.status == 200 && xhr.readyState == 4) {
-				    		console.log(xhr.status);
-					        // var response = JSON.parse(xhr.responseText);
-					        // var loc = response["results"][0]["formatted_address"];
-					        // document.getElementById('checkIn').innerText = loc;
+					        var response = JSON.parse(xhr.responseText);
+					        var loc = response["results"][0]["formatted_address"];
+					        document.getElementById('checkIn').innerText = loc;
 			
-					        // var data = {
-					        // 	'location': loc,
-					        // 	'idtoken': prof_id
-					        // };
+					        var data = {
+					        	'location': loc,
+					        	'idtoken': prof_id
+					        };
 			
-					  //       $.ajax({
-							//     type : "POST",
-							//     url : "../checkin",
-							//     data: JSON.stringify(data, null, '\t'),
-							//     contentType: 'application/json;charset=UTF-8',
-							//     success: function(result) {
-							//         document.getElementById("checkIn").innerText = "Sent " + loc;
-							//         console.log("Sent!");
-							//     },
-							//     complete: function(response) {
-							//     	console.log(response.responseText);
-							//     }
-							// });
+					        $.ajax({
+							    type : "POST",
+							    url : "../checkin",
+							    data: JSON.stringify(data, null, '\t'),
+							    contentType: 'application/json;charset=UTF-8',
+							    success: function(result) {
+							        document.getElementById("checkIn").innerText = "Sent " + loc;
+							        console.log("Sent!");
+							    },
+							    complete: function(response) {
+							    	console.log(response.responseText);
+							    }
+							});
 				    	}
 				    }
 				}, function() {

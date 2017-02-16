@@ -41,7 +41,7 @@ def checkin():
   if request.method == 'GET':
     return redirect(url_for('index'))
   elif request.method == 'POST':
-    location = request.json ['location']
+    location = request.json['location']
     token = request.json['idtoken']
 
     try:
@@ -58,7 +58,7 @@ def checkin():
 
       u = User(name, email, location)
       db.session.add(u)
-      db.session.commit(u)
+      db.session.commit()
 
 
       return "Name: " + name + ", Email: " + email, 200

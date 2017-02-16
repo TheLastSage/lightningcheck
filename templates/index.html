@@ -64,8 +64,8 @@
 
 				     
 				    function processRequest(e) {
-				    	console.log(xhr.status);
-				    	if (xhr.status == 200) {
+				    	if (xhr.status == 200 && xhr.readyState == 4) {
+				    		console.log(xhr.status);
 					        // var response = JSON.parse(xhr.responseText);
 					        // var loc = response["results"][0]["formatted_address"];
 					        // document.getElementById('checkIn').innerText = loc;

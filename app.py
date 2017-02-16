@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from oauth2client import client, crypt
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -20,6 +21,7 @@ class User(db.Model):
   name = db.Column(db.String(100))
   email = db.Column(db.String(100))
   location = db.Column(db.String(100))
+  time = db.Column(db.DateTime)
 
   def __init__(self, name, email, location):
     self.name = name
@@ -69,8 +71,5 @@ def checkin():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-  # db.create_all()
-  # db.session.commit()
-
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port, debug=True)

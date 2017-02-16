@@ -1,12 +1,12 @@
 {
-  "name": "Flask Heroku Sample",
-  "description": "A sample Flask app on Heroku",
+  "name": "Lightning Check",
+  "description": "A work in progress app for quick and accurate location based attendance taking.",
   "keywords": [
     "flask",
     "python",
     "sample"
   ],
-  "repository": "https://github.com/yefim/flask-heroku-sample",
+  "repository": "https://github.com/TheLastSage/lightningcheck",
   "addons": [
     "heroku-postgresql"
   ]

@@ -68,7 +68,7 @@ def checkin():
     # db.session.add(u)
     # db.session.commit()
     # return redirect(url_for('index'))
-    return location, 204
+    return 'test', 204
 
 if __name__ == '__main__':
   # db.create_all()

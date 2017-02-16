@@ -80,8 +80,8 @@
 						        document.getElementById("checkIn").innerText = "Sent " + loc;
 						        console.log("Sent!");
 						    },
-						    complete: function(responseText) {
-						    	console.log(responseText);
+						    complete: function(response) {
+						    	console.log(response.responseText);
 						    }
 						});
 				      }

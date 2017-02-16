@@ -45,14 +45,14 @@ def checkin():
     token = request.json['idtoken']
 
     try:
-    #   idinfo = client.verify_id_token(token, CLIENT_ID)
+      idinfo = client.verify_id_token(token, CLIENT_ID)
 
-    #   if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-    #       raise crypt.AppIdentityError("Wrong issuer.")
+      # if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+          # raise crypt.AppIdentityError("Wrong issuer.")
 
-    #   # If auth request is from a G Suite domain:
-    #   #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
-    #   #    raise crypt.AppIdentityError("Wrong hosted domain.")
+      # If auth request is from a G Suite domain:
+      #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
+      #    raise crypt.AppIdentityError("Wrong hosted domain.")
 
     #   name = idinfo['name']
     #   email = idinfo['email']
@@ -68,7 +68,7 @@ def checkin():
     # db.session.add(u)
     # db.session.commit()
     # return redirect(url_for('index'))
-    return 'test', 204
+    return '', 204
 
 if __name__ == '__main__':
   # db.create_all()

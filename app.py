@@ -50,7 +50,7 @@ def checkin():
       if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
           raise crypt.AppIdentityError("Wrong issuer.")
 
-      if idinfo['aud'] is not CLIENT_ID:
+      if idinfo['aud'] != CLIENT_ID:
           raise crypt.AppIdentityError("Wrong Client.")
 
       # If auth request is from a G Suite domain:
@@ -63,7 +63,7 @@ def checkin():
       return "Name: " + name + ", Email: " + email, 200
     except crypt.AppIdentityError:
       # Invalid token
-      return 'failed', 200
+      return idInfo['aud'], 200
 
     # u = User(request.form['name'], request.form['email'], request.form['location'])
     # u = User(request.json['name'], request.json['email'], request.json['location'])

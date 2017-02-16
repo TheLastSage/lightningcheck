@@ -47,8 +47,8 @@ def checkin():
     try:
       idinfo = client.verify_id_token(token, CLIENT_ID)
 
-      # if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-          # raise crypt.AppIdentityError("Wrong issuer.")
+      if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+          raise crypt.AppIdentityError("Wrong issuer.")
 
       # If auth request is from a G Suite domain:
       #if idinfo['hd'] != GSUITE_DOMAIN_NAME:

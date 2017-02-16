@@ -59,11 +59,14 @@
 				    xhr.send();
 
 				    xhr.onreadystatechange = processRequest;
+
+			    	console.log("outside");
+
 				     
 				    function processRequest(e) {
-				    	console.log("testing");
+				    	console.log("inside");
 				    	if (xhr.status == 200) {
-					        var response = JSON.parse(xhr.responseText);
+					        // var response = JSON.parse(xhr.responseText);
 					        // var loc = response["results"][0]["formatted_address"];
 					        // document.getElementById('checkIn').innerText = loc;
 			

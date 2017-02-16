@@ -54,10 +54,10 @@ def checkin():
       #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
       #    raise crypt.AppIdentityError("Wrong hosted domain.")
 
-    #   name = idinfo['name']
-    #   email = idinfo['email']
+      name = idinfo['name']
+      email = idinfo['email']
 
-      return 'worked', 200
+      return "Name: " + name + ", Email: " + email, 200
     except crypt.AppIdentityError:
       # Invalid token
       return 'failed', 200

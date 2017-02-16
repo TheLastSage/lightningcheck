@@ -61,10 +61,11 @@
 				    xhr.onreadystatechange = processRequest;
 				     
 				    function processRequest(e) {
+				    	console.log("testing");
 				    	if (xhr.status == 200) {
 					        var response = JSON.parse(xhr.responseText);
-					        var loc = response["results"][0]["formatted_address"];
-					        document.getElementById('checkIn').innerText = loc;
+					        // var loc = response["results"][0]["formatted_address"];
+					        // document.getElementById('checkIn').innerText = loc;
 			
 					        // var data = {
 					        // 	'location': loc,

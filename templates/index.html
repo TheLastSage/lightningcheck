@@ -43,7 +43,7 @@
   	var prof_id = null;
 
 	function findSelf() {
-		event.stopDefault();
+		event.preventDefault();
 		if (prof_id != null) {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {

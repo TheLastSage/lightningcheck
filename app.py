@@ -53,31 +53,23 @@ def checkin():
       if idinfo['aud'] != CLIENT_ID:
           raise crypt.AppIdentityError("Wrong Client.")
 
-      # If auth request is from a G Suite domain:
-      #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
-      #    raise crypt.AppIdentityError("Wrong hosted domain.")
-
       name = idinfo['name']
       email = idinfo['email']
+
+      u = User(name, email, location)
+      db.session.add(u)
+      db.session.commit(u)
+
 
       return "Name: " + name + ", Email: " + email, 200
     except crypt.AppIdentityError:
       # Invalid token
-      return idInfo['aud'], 200
+      return "OAuth Identity Error", 200
 
-    # u = User(request.form['name'], request.form['email'], request.form['location'])
-    # u = User(request.json['name'], request.json['email'], request.json['location'])
-    # u = User("test" , "email", "please")
-    # db.session.add(u)
-    # db.session.commit()
-    # return redirect(url_for('index'))
-    return '', 204
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
   # db.create_all()
-  # db.session.commit()
-  # u1 = User('test', 'email', 'testloc')
-  # db.session.add(u1)
   # db.session.commit()
 
   port = int(os.environ.get('PORT', 5000))

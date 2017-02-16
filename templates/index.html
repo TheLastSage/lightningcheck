@@ -40,52 +40,58 @@
   // failed.", it means you probably did not give permission for the browser to
   // locate you.
 
+  	var prof_id = null;
+
 	function findSelf() {
-		if (navigator.geolocation) {
-		  navigator.geolocation.getCurrentPosition(function(position) {
-		    var pos = {
-		      lat: position.coords.latitude,
-		      lng: position.coords.longitude
-		    };
-
-		    // Change this when you figure out where to send the position.
-		    // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
-
-		    var xhr = new XMLHttpRequest();
-		    xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
-		    xhr.send();
-		     
-		    xhr.onreadystatechange = processRequest;
-		     
-		    function processRequest(e) {
-		      if (xhr.status == 200) {
-		        var response = JSON.parse(xhr.responseText);
-		        var loc = response["results"][0]["formatted_address"];
-		        document.getElementById('checkIn').innerText = loc;
-
-		        data = {
-		        	'name': 'test',
-		        	'email': 'testemail',
-		        	'location': loc
-		        }
-
-		        $.ajax({
-				    type : "POST",
-				    url : "../checkin",
-				    data: JSON.stringify(data, null, '\t'),
-				    contentType: 'application/json;charset=UTF-8',
-				    success: function(result) {
-				        document.getElementById("checkIn").innerText = "Sent " + loc;
-				        console.log("Sent!");
+		if (prof_id != null) {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+				    var pos = {
+				      lat: position.coords.latitude,
+				      lng: position.coords.longitude
+				    };
+		
+				    // Change this when you figure out where to send the position.
+				    // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
+		
+				    var xhr = new XMLHttpRequest();
+				    xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
+				    xhr.send();
+				     
+				    xhr.onreadystatechange = processRequest;
+				     
+				    function processRequest(e) {
+				      if (xhr.status == 200) {
+				        var response = JSON.parse(xhr.responseText);
+				        var loc = response["results"][0]["formatted_address"];
+				        document.getElementById('checkIn').innerText = loc;
+		
+				        data = {
+				        	'location': loc,
+				        	'idtoken': prof_id
+				        }
+		
+				        $.ajax({
+						    type : "POST",
+						    url : "../checkin",
+						    data: JSON.stringify(data, null, '\t'),
+						    contentType: 'application/json;charset=UTF-8',
+						    success: function(result) {
+						        document.getElementById("checkIn").innerText = "Sent " + loc;
+						        console.log("Sent!");
+						    },
+						    complete: function(responseText) {
+						    	console.log(responseText);
+						    }
+						});
+				      }
 				    }
+				}, function() {
+				    handleLocationError(true);
 				});
-		      }
-		    }
-		  }, function() {
-		    handleLocationError(true);
-		  });
-		} else {
-		  handleLocationError(false);
+			} else {
+			  handleLocationError(false);
+			}
 		}
 	}
 
@@ -95,23 +101,26 @@
 
 	function onSignIn(googleUser) {
 		var profile = googleUser.getBasicProfile();
-		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-		console.log('Name: ' + profile.getName());
+		// console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		// console.log('Name: ' + profile.getName());
 		// console.log('Image URL: ' + profile.getImageUrl());
-		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		// console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
 		document.getElementById("name").innerText = profile.getName();
 		document.getElementById("email").innerText = profile.getEmail();
 		document.getElementById("info").classList.remove("hidden_div");
+
+		prof_id = googleUser.getAuthResponse().id_token;
 	}
 
 	function signOut() {
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut().then(function () {
-		  console.log('User signed out.');
+	  		console.log('User signed out.');
+			document.getElementById("info").classList.add("hidden_div");
+			prof_id = null;
 		});
 
-		document.getElementById("info").classList.add("hidden_div");
 	}
 
 </script>

@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from oauth2client import client, crypt
 
 app = Flask(__name__)
 
@@ -10,6 +11,8 @@ DATABASE_URL = os.environ['DATABASE_URL']
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
+
+CLIENT_ID = "22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com"
 
 
 class User(db.Model):
@@ -33,24 +36,36 @@ def index():
   # return render_template('index.html', users=users)
   return render_template('index.html')
 
-
-# @app.route('/user', methods=['POST'])
-# def user():
-#   u = User(request.form['name'], request.form['email'])
-#   db.session.add(u)
-#   db.session.commit()
-#   return redirect(url_for('index'))
-
 @app.route('/checkin', methods=['GET', 'POST'])
 def checkin():
   if request.method == 'GET':
     return redirect(url_for('index'))
   elif request.method == 'POST':
+    location = request.form['location']
+    token = request.form['idtoken']
+
+    try:
+      idinfo = client.verify_id_token(token, CLIENT_ID)
+
+      if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+          raise crypt.AppIdentityError("Wrong issuer.")
+
+      # If auth request is from a G Suite domain:
+      #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
+      #    raise crypt.AppIdentityError("Wrong hosted domain.")
+
+      name = idinfo['name']
+      email = idinfo['email']
+
+      return name, 204
+    except crypt.AppIdentityError:
+      # Invalid token
+
     # u = User(request.form['name'], request.form['email'], request.form['location'])
-    u = User(request.json['name'], request.json['email'], request.json['location'])
+    # u = User(request.json['name'], request.json['email'], request.json['location'])
     # u = User("test" , "email", "please")
-    db.session.add(u)
-    db.session.commit()
+    # db.session.add(u)
+    # db.session.commit()
     # return redirect(url_for('index'))
     return '', 204
 

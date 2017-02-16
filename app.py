@@ -44,7 +44,7 @@ def checkin():
     location = request.form['location']
     token = request.form['idtoken']
 
-    try:
+    # try:
     #   idinfo = client.verify_id_token(token, CLIENT_ID)
 
     #   if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
@@ -57,10 +57,10 @@ def checkin():
     #   name = idinfo['name']
     #   email = idinfo['email']
 
-      return location, 204
-    except crypt.AppIdentityError:
-      # Invalid token
-      return 'failed', 204
+    #   return location, 204
+    # except crypt.AppIdentityError:
+    #   # Invalid token
+    #   return 'failed', 204
 
     # u = User(request.form['name'], request.form['email'], request.form['location'])
     # u = User(request.json['name'], request.json['email'], request.json['location'])

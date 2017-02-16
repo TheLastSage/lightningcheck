@@ -41,9 +41,10 @@
   // locate you.
 
   	var prof_id = null;
+  	var email_temp = false;
 
 	function findSelf() {
-		if (prof_id != null) {
+		if (prof_id != null && email_temp) {
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function(position) {
 				    var pos = {
@@ -92,6 +93,8 @@
 			} else {
 			  handleLocationError(false);
 			}
+		} else {
+			alert("Please Sign-In with your Berkeley Email");
 		}
 	}
 
@@ -111,6 +114,9 @@
 		document.getElementById("info").classList.remove("hidden_div");
 
 		prof_id = googleUser.getAuthResponse().id_token;
+		if (profile.getEmail().endsWith("@berkeley.edu")) {
+			email_temp = true;
+		}
 	}
 
 	function signOut() {
@@ -119,6 +125,7 @@
 	  		console.log('User signed out.');
 			document.getElementById("info").classList.add("hidden_div");
 			prof_id = null;
+			email_temp = false;
 		});
 
 	}

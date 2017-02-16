@@ -50,6 +50,9 @@ def checkin():
       if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
           raise crypt.AppIdentityError("Wrong issuer.")
 
+      if idinfo['aud'] is not CLIENT_ID:
+          raise crypt.AppIdentityError("Wrong Client.")
+
       # If auth request is from a G Suite domain:
       #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
       #    raise crypt.AppIdentityError("Wrong hosted domain.")

@@ -44,21 +44,21 @@ def checkin():
     location = request.form['location']
     token = request.form['idtoken']
 
-    try:
-      idinfo = client.verify_id_token(token, CLIENT_ID)
+    # try:
+    #   idinfo = client.verify_id_token(token, CLIENT_ID)
 
-      if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-          raise crypt.AppIdentityError("Wrong issuer.")
+    #   if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+    #       raise crypt.AppIdentityError("Wrong issuer.")
 
-      # If auth request is from a G Suite domain:
-      #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
-      #    raise crypt.AppIdentityError("Wrong hosted domain.")
+    #   # If auth request is from a G Suite domain:
+    #   #if idinfo['hd'] != GSUITE_DOMAIN_NAME:
+    #   #    raise crypt.AppIdentityError("Wrong hosted domain.")
 
-      name = idinfo['name']
-      email = idinfo['email']
+    #   name = idinfo['name']
+    #   email = idinfo['email']
 
-      return name, 204
-    except crypt.AppIdentityError:
+    #   return name, 204
+    # except crypt.AppIdentityError:
       # Invalid token
 
     # u = User(request.form['name'], request.form['email'], request.form['location'])

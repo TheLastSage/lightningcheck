@@ -27,7 +27,7 @@ class User(db.Model):
     self.location = location
 
   def __repr__(self):
-    return '<Name %r>' % self.location
+    return '<Name: ' + self.name + ', Email: ' + self.email + ', Location: ' + self.location + '>'
 
 
 @app.route('/', methods=['GET'])

@@ -57,10 +57,10 @@ def checkin():
     #   name = idinfo['name']
     #   email = idinfo['email']
 
-      return 'worked', 204
+      return 'worked', 200
     except crypt.AppIdentityError:
       # Invalid token
-      return 'failed', 204
+      return 'failed', 200
 
     # u = User(request.form['name'], request.form['email'], request.form['location'])
     # u = User(request.json['name'], request.json['email'], request.json['location'])

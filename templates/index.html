@@ -79,6 +79,8 @@
 						    success: function(result) {
 						        document.getElementById("checkIn").innerText = "Sent " + loc;
 						        console.log("Sent!");
+						    },
+						    complete: function(response) {
 						    	console.log(response.responseText);
 						    }
 						});

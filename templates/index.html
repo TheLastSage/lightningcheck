@@ -58,36 +58,34 @@
 				    xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
 				    xhr.send();
 
-				    console.log("test");
+				    xhr.onreadystatechange = processRequest;
 				     
-				  //   xhr.onreadystatechange = processRequest;
-				     
-				  //   function processRequest(e) {
-				  //     if (xhr.status == 200) {
-				  //       var response = JSON.parse(xhr.responseText);
-				  //       var loc = response["results"][0]["formatted_address"];
-				  //       document.getElementById('checkIn').innerText = loc;
-		
-				  //       data = {
-				  //       	'location': loc,
-				  //       	'idtoken': prof_id
-				  //       }
-		
-				  //       $.ajax({
-						//     type : "POST",
-						//     url : "../checkin",
-						//     data: JSON.stringify(data, null, '\t'),
-						//     contentType: 'application/json;charset=UTF-8',
-						//     success: function(result) {
-						//         document.getElementById("checkIn").innerText = "Sent " + loc;
-						//         console.log("Sent!");
-						//     },
-						//     complete: function(response) {
-						//     	console.log(response.responseText);
-						//     }
-						// });
-				  //     }
-				  //   }
+				    function processRequest(e) {
+				    	if (xhr.status == 200) {
+					        var response = JSON.parse(xhr.responseText);
+					        var loc = response["results"][0]["formatted_address"];
+					        document.getElementById('checkIn').innerText = loc;
+			
+					        data = {
+					        	'location': loc,
+					        	'idtoken': prof_id
+					        }
+			
+					  //       $.ajax({
+							//     type : "POST",
+							//     url : "../checkin",
+							//     data: JSON.stringify(data, null, '\t'),
+							//     contentType: 'application/json;charset=UTF-8',
+							//     success: function(result) {
+							//         document.getElementById("checkIn").innerText = "Sent " + loc;
+							//         console.log("Sent!");
+							//     },
+							//     complete: function(response) {
+							//     	console.log(response.responseText);
+							//     }
+							// });
+				    	}
+				    }
 				}, function() {
 				    handleLocationError(true);
 				});

@@ -41,7 +41,7 @@ def checkin():
   if request.method == 'GET':
     return redirect(url_for('index'))
   elif request.method == 'POST':
-    location = request.json['location']
+    location = request.json ['location']
     token = request.json['idtoken']
 
     try:
@@ -57,7 +57,7 @@ def checkin():
     #   name = idinfo['name']
     #   email = idinfo['email']
 
-      return location, 204
+      return 'worked', 204
     except crypt.AppIdentityError:
       # Invalid token
       return 'failed', 204
@@ -68,7 +68,7 @@ def checkin():
     # db.session.add(u)
     # db.session.commit()
     # return redirect(url_for('index'))
-    return '', 204
+    return location, 204
 
 if __name__ == '__main__':
   # db.create_all()

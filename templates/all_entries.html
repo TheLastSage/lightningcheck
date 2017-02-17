@@ -17,7 +17,14 @@
 
 </style>
 <div class="center_stuff">
-  {% for u in checkins %}
-  <p class="element">{{ u.id }} | {{ u.name }} | {{ u.email }} | {{ u.location }}</p>
-  {% endfor %}
+  <table border="1">
+    {% for u in checkins %}
+    <tr>
+      <td>{{ u.id }}</td>
+      <td>{{ u.name }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.location }}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </div>

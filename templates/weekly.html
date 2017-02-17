@@ -1,4 +1,4 @@
-<title>All Check In's</title>
+<title>Week {{ number }}</title>
 <style>
   .center_stuff {
     margin: 0 auto;
@@ -22,15 +22,21 @@
   }
 
 </style>
+<h2 class="center_stuff">Here</h2>
 <table class="center_stuff">
-  {% for u in checkins %}
+  {% for u in here %}
   <tr>
-    <td>{{ u.id }}</td>
-    <td>{{ u.name }}</td>
-    <td>{{ u.email }}</td>
-    <td>{{ u.location }}</td>
-    <td>{{ u.time.time().strftime("%H:%M:%S") }}</td>
-    <td>{{ u.time.date() }}</td>
+    <td>{{ u[1] }}</td>
+    <td>{{ u[0] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<h2 class="center_stuff">Absent</h2>
+<table class="center_stuff">
+  {% for u in absent %}
+  <tr>
+    <td>{{ u[1] }}</td>
+    <td>{{ u[0] }}</td>
   </tr>
   {% endfor %}
 </table>

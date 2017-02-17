@@ -84,7 +84,7 @@ PEOPLE = {
   "evansheng112@berkeley.edu": "Evan Sheng",
   "robert359@berkeley.edu": "Robert Spragg",
   "csturgill@berkeley.edu": "Derek Sturgill",
-  "iris.sun@berkeley.edu": "(Iris) Dingyuan Sun",
+  "iris.sun@berkeley.edu": "Dingyuan (Iris) Sun",
   "kthvar@berkeley.edu": "Keshav Thvar",
   "nicoletsai@berkeley.edu": "Nicole Tsai",
   "jessiewang3@berkeley.edu": "Jessie Wang",
@@ -208,16 +208,16 @@ def week_check(number):
       person = weekly[email]
       if person["time2"] is not None:
         person_first = person["time1"]
-    #     if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
-    #       person_second = person["time2"]
+        if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
+          person_second = person["time2"]
     #       if time2 is not None and time2 + DIFF > person_second and time2 - DIFF < person_second:
     #         temp_here.append(email)
 
     for email in PEOPLE:
       if email in temp_here:
-        here.append((PEOPLE[email], email))
+        here.append((PEOPLE[email].split()[-1], PEOPLE[email], email))
       else:
-        absent.append((PEOPLE[email], email))
+        absent.append((PEOPLE[email].split()[-1], PEOPLE[email], email))
 
     here.sort()
     absent.sort()

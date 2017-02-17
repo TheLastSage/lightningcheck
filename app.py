@@ -16,26 +16,32 @@ db = SQLAlchemy(app)
 
 CLIENT_ID = "22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com"
 
+pst = pytz.timezone('America/Los_Angeles')
 
-class User(db.Model):
+
+class CheckIn(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100))
   email = db.Column(db.String(100))
   location = db.Column(db.String(100))
-  # time = db.Column(db.DateTime)
+  time = db.Column(db.DateTime)
 
-  def __init__(self, name, email, location):
+  def __init__(self, name, email, location, time=None):
     self.name = name
     self.email = email
     self.location = location
 
+    if time is None:
+      time = datetime.now(tz=pst)
+    self.time = time
+
   def __repr__(self):
-    return '<Name: ' + self.name + ', Email: ' + self.email + ', Location: ' + self.location + '>'
+    return '<Name: ' + self.name + ', Email: ' + self.email + ', Location: ' + self.location + ', Time: ' + self.time.time() + '>'
 
 
 @app.route('/', methods=['GET'])
 def index():
-  users = User.query.all()
+  users = CheckIn.query.all()
   # return render_template('index.html', users=users)
   return render_template('index.html')
 
@@ -59,7 +65,7 @@ def checkin():
       name = idinfo['name']
       email = idinfo['email']
 
-      u = User(name, email, location)
+      u = CheckIn(name, email, location)
       db.session.add(u)
       db.session.commit()
 

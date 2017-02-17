@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from oauth2client import client, crypt
-from datetime import datetime
+import datetime
 
 app = Flask(__name__)
 

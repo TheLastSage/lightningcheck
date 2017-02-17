@@ -36,7 +36,7 @@ class CheckIn(db.Model):
     self.time = time
 
   def __repr__(self):
-    return '<Name: ' + self.name + ', Email: ' + self.email + ', Location: ' + self.location + ', Time: ' + self.time.time() + '>'
+    return '<Name: ' + self.name + ', Email: ' + self.email + ', Location: ' + self.location + ', Time: ' + str(self.time.time()) + '>'
 
 
 @app.route('/', methods=['GET'])

@@ -1,0 +1,24 @@
+<title>All Check In's</title>
+<style>
+  .center_stuff {
+    margin: 0 auto;
+    margin-top: 20%;
+    width: 50%;
+    text-align: center;
+  }
+
+  .hidden_div {
+  	visibility: hidden;
+  }
+
+  .element {
+  	margin: 0 auto;
+  	margin-top: 10px;
+  }
+
+</style>
+<div class="center_stuff">
+  {% for u in checkins %}
+  <p class="element">{{ u.id }} | {{ u.name }} | {{ u.email }} | {{ u.location }} | {{ str(u.time.date()) }} | {{ str(u.time.time()) }}
+  {% endfor %}
+</div>

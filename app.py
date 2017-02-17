@@ -41,8 +41,6 @@ class CheckIn(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  users = CheckIn.query.all()
-  # return render_template('index.html', users=users)
   return render_template('index.html')
 
 @app.route('/checkin', methods=['GET', 'POST'])
@@ -76,6 +74,12 @@ def checkin():
       return "OAuth Identity Error", 200
 
     return redirect(url_for('index'))
+
+@app.route('/all', methods=['GET'])
+def all():
+  check_ins = CheckIn.query.all()
+  return render_template('all_entries.html', checkins=check_ins)
+
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))

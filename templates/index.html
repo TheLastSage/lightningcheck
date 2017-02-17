@@ -21,18 +21,18 @@
   }
 
 </style>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <div class="center_stuff">
 	<div id="info" class="hidden_div">
 		<div id="name"></div>
 		<div id="email"></div>
 	</div>
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
 	<div class="abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
-		<a href="#" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</a>
+		<span href="#" style="font-size:13px;line-height:34px;" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</span>
 	</div>
     <div id="checkIn">Not Set</div>
     <div class="abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
-    	<input type="button" onclick="findSelf()" value="Find Location" class="abcRioButtonContentWrapper">
+    	<span onclick="findSelf()" value="Find Location" class="abcRioButtonContentWrapper" style="font-size:13px;line-height:34px;">Find Location</span>
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

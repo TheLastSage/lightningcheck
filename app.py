@@ -219,6 +219,9 @@ def week_check(number):
       else:
         absent.append((PEOPLE[email], email))
 
+    here.sort()
+    absent.sort()
+
     return render_template("weekly.html", week=number, here=here, absent=absent)
 
 

@@ -114,7 +114,7 @@ def week_check(number):
       local = aware.astimezone(pst)
       u.time = local
 
-      if str(u.time.date()) == date:
+      if str(u.time.date()) == date and "Etcheverry Hall" in u.location:
         weekly.append(u)
 
     return render_template("all_entries.html", checkins=weekly)

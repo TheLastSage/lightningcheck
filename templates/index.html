@@ -12,7 +12,7 @@
   .center_stuff {
     margin: 0 auto;
     margin-top: 20%;
-    width: 20%;
+    width: 50%;
     text-align: center;
   }
 
@@ -20,18 +20,23 @@
   	visibility: hidden;
   }
 
+  .element {
+  	margin: 0 auto;
+  	margin: top: 10px;
+  }
+
 </style>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <div class="center_stuff">
 	<div id="info" class="hidden_div">
 		<div id="name"></div>
 		<div id="email"></div>
 	</div>
-	<div class="abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
+	<div class="g-signin2 element" data-onsuccess="onSignIn"></div>
+	<div class="element abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
 		<span href="#" style="font-size:13px;line-height:34px;" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</span>
 	</div>
     <div id="checkIn">Not Set</div>
-    <div class="abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
+    <div class="element abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
     	<span onclick="findSelf()" value="Find Location" class="abcRioButtonContentWrapper" style="font-size:13px;line-height:34px;">Find Location</span>
 	</div>
 </div>

@@ -19,6 +19,24 @@ CLIENT_ID = "22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent
 pst = pytz.timezone('America/Los_Angeles')
 utc = pytz.utc
 
+weeks = {
+  0: '2017-01-23',
+  1: '2017-01-30',
+  2: '2017-02-06',
+  3: '2017-02-13',
+  4: '2017-02-20',
+  5: '2017-02-27',
+  6: '2017-03-06',
+  7: '2017-03-13',
+  8: '2017-03-20',
+  9: '2017-03-27',
+  10: '2017-04-03',
+  11: '2017-04-10',
+  12: '2017-04-17',
+  13: '2017-04-24',
+  14: '2017-05-01',
+}
+
 
 class CheckIn(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -84,6 +102,22 @@ def all():
     local = aware.astimezone(pst)
     u.time = local
   return render_template('all_entries.html', checkins=check_ins)
+
+
+@app.route('/week-<number>', methods=['GET'])
+def week_check(number):
+    date = weeks[number]
+    check_ins = CheckIn.query.all()
+    weekly = []
+    for u in check_ins:
+      aware = utc.localize(u.time)
+      local = aware.astimezone(pst)
+      u.time = local
+
+      if str(u.time.date()) == date:
+        weekly.append(u)
+
+    return render_template("all_entries.html", checkins=weekly)
 
 
 if __name__ == '__main__':

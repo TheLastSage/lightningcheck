@@ -106,7 +106,7 @@ def all():
 
 @app.route('/week-<number>', methods=['GET'])
 def week_check(number):
-    date = weeks[number]
+    date = weeks[int(number)]
     check_ins = CheckIn.query.all()
     weekly = []
     for u in check_ins:

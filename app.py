@@ -17,6 +17,7 @@ db = SQLAlchemy(app)
 CLIENT_ID = "22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com"
 
 pst = pytz.timezone('America/Los_Angeles')
+utc = pytz.utc
 
 
 class CheckIn(db.Model):
@@ -78,6 +79,10 @@ def checkin():
 @app.route('/all', methods=['GET'])
 def all():
   check_ins = CheckIn.query.all()
+  for u in check_ins:
+    aware = utc.localize(u.time)
+    local = aware.astimezone(pst)
+    u.time = local
   return render_template('all_entries.html', checkins=check_ins)
 
 

@@ -15,16 +15,19 @@
   	margin-top: 10px;
   }
 
+  td {
+    padding: 5px;
+  }
+
 </style>
-<div class="center_stuff">
-  <table border="1">
-    {% for u in checkins %}
-    <tr>
-      <td>{{ u.id }}</td>
-      <td>{{ u.name }}</td>
-      <td>{{ u.email }}</td>
-      <td>{{ u.location }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
+<table class="center_stuff" border="1">
+  {% for u in checkins %}
+  <tr>
+    <td>{{ u.id }}</td>
+    <td>{{ u.name }}</td>
+    <td>{{ u.email }}</td>
+    <td>{{ u.location }}</td>
+    <td>{{ u.time }}</td>
+  </tr>
+  {% endfor %}
+</table>

@@ -32,7 +32,7 @@ class CheckIn(db.Model):
     self.location = location
 
     if time is None:
-      time = datetime.now(tz=pst)
+      time = datetime.now()
     self.time = time
 
   def __repr__(self):

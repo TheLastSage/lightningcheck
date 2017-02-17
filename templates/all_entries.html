@@ -19,6 +19,6 @@
 </style>
 <div class="center_stuff">
   {% for u in checkins %}
-  <p class="element">{{ u.id }} | {{ u.name }} | {{ u.email }} | {{ u.location }} | {{ str(u.time.date()) }} | {{ str(u.time.time()) }}
+  <p class="element">{{ str(u.id) }} | {{ u.name }} | {{ u.email }} | {{ u.location }} | {{ str(u.time) }}</p>
   {% endfor %}
 </div>

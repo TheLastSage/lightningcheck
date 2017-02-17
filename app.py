@@ -208,8 +208,8 @@ def week_check(number):
       person = weekly[email]
       if person["time2"] is not None:
         person_first = person["time1"]
-        if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
-          person_second = person["time2"]
+        # if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
+          # person_second = person["time2"]
     #       if time2 is not None and time2 + DIFF > person_second and time2 - DIFF < person_second:
     #         temp_here.append(email)
 

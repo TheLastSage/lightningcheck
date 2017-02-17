@@ -3,6 +3,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from oauth2client import client, crypt
+from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -20,7 +22,7 @@ class User(db.Model):
   name = db.Column(db.String(100))
   email = db.Column(db.String(100))
   location = db.Column(db.String(100))
-  time = db.Column(db.DateTime)
+  # time = db.Column(db.DateTime)
 
   def __init__(self, name, email, location):
     self.name = name

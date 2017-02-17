@@ -1,14 +1,5 @@
 <title>Lightning Check In!</title>
 <style>
-  /* Always set the map height explicitly to define the size of the div
-   * element that contains the map. */
-  /* Optional: Makes the sample page fill the window. */
-  /*html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-*/
   .center_stuff {
     margin: 0 auto;
     margin-top: 20%;
@@ -22,20 +13,20 @@
 
   .element {
   	margin: 0 auto;
-  	margin: top: 10px;
+  	margin-top: 10px;
   }
 
 </style>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <div class="center_stuff">
 	<div id="info" class="hidden_div">
 		<div id="name"></div>
 		<div id="email"></div>
 	</div>
-	<div class="g-signin2 element" data-onsuccess="onSignIn"></div>
 	<div class="element abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
 		<span href="#" style="font-size:13px;line-height:34px;" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</span>
 	</div>
-    <div id="checkIn">Not Set</div>
+    <div class="element" id="checkIn">Not Set</div>
     <div class="element abcRioButton abcRioButtonLightBlue" style="height:36px;width:120px;">
     	<span onclick="findSelf()" value="Find Location" class="abcRioButtonContentWrapper" style="font-size:13px;line-height:34px;">Find Location</span>
 	</div>
@@ -44,10 +35,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com">
 <script>
-  // Note: This example requires that you consent to location sharing when
-  // prompted by your browser. If you see the error "The Geolocation service
-  // failed.", it means you probably did not give permission for the browser to
-  // locate you.
 
   	var prof_id = null;
   	var email_temp = false;
@@ -60,9 +47,6 @@
 				      lat: position.coords.latitude,
 				      lng: position.coords.longitude
 				    };
-		
-				    // Change this when you figure out where to send the position.
-				    // document.getElementById('checkIn').innerText = pos.lat + "\n" + pos.lng;
 		
 				    var xhr = new XMLHttpRequest();
 				    xhr.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=AIzaSyBljiCLSI42QdZibI2_ykXHHLsP3e5oE74", true);
@@ -113,10 +97,6 @@
 
 	function onSignIn(googleUser) {
 		var profile = googleUser.getBasicProfile();
-		// console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-		// console.log('Name: ' + profile.getName());
-		// console.log('Image URL: ' + profile.getImageUrl());
-		// console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
 		document.getElementById("name").innerText = profile.getName();
 		document.getElementById("email").innerText = profile.getEmail();
@@ -141,5 +121,5 @@
 
 </script>
 <script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8ICIIQpZeAaablY62VWZg-poyOX4ytJQ&callback=initMap">
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8ICIIQpZeAaablY62VWZg-poyOX4ytJQ">
 </script>

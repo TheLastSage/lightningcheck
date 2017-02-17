@@ -17,17 +17,20 @@
 
   td {
     padding: 5px;
+    border-right: 1px;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
 </style>
-<table class="center_stuff" border="1">
+<table class="center_stuff">
   {% for u in checkins %}
   <tr>
     <td>{{ u.id }}</td>
     <td>{{ u.name }}</td>
     <td>{{ u.email }}</td>
     <td>{{ u.location }}</td>
-    <td>{{ u.time.time() }}</td>
+    <td>{{ u.time.time().strftime("%H:%M:%S") }}</td>
+    <td>{{ u.time.date() }}</td>
   </tr>
   {% endfor %}
 </table>

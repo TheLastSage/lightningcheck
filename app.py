@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, desc
 from oauth2client import client, crypt
 from datetime import datetime, timedelta
 import pytz
@@ -102,7 +102,8 @@ ADMIN = [
   "jdong@berkeley.edu",
   "surinagulati@berkeley.edu",
   "s.t@berkeley.edu",
-  "koladyr@berkeley.edu"
+  "koladyr@berkeley.edu",
+  "ADMIN_TEST_EMAIL"
 ]
 
 class CheckIn(db.Model):
@@ -177,8 +178,8 @@ def week_check(number):
     check_ins = CheckIn.query.all()
     weekly = {}
     temp_here = []
-    here  = set()
-    absent = set()
+    here  = []
+    absent = []
     time1 = None
     time2 = None
     for u in check_ins:

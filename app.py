@@ -92,7 +92,7 @@ PEOPLE = {
   "jessiewang3@berkeley.edu": "Jessie Wang",
   "NEEDS EMAIL": "William Wang",
   "thomas.warloe@berkeley.edu": "Thomas Warloe",
-  "NEEDS EMAIL": "Serena Wu",
+  "serenawu95@berkeley.edu": "Serena Wu",
   "kenny.hyun@berkeley.edu": "Kenny Yoo",
   "carolzhang@berkeley.edu": "Carol Zhang",
   "zhangzhao@berkeley.edu": "Zhao Zhang",
@@ -202,6 +202,9 @@ def markhere():
       for q in dayQs:
         if q.email in ADMIN:
           admin_checks.append(q)
+
+        if q.email == email:
+          db.session.remove(q)
 
       if len(admin_checks) != 2:
         return "Needs 2 Admin Check Ins", 200

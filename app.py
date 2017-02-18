@@ -177,8 +177,8 @@ def week_check(number):
     check_ins = CheckIn.query.all()
     weekly = {}
     temp_here = []
-    here  = []
-    absent = []
+    here  = set()
+    absent = set()
     time1 = None
     time2 = None
     for u in check_ins:

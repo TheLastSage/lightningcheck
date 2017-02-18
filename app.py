@@ -189,29 +189,29 @@ def week_check(number):
       if str(u.time.date()) == date and "Etcheverry Hall" in u.location:
         if u.email in ADMIN:
           if time1 is None:
-            time1 = u.time.time()
+            time1 = u.time
           else:
-            time2 = u.time.time()
+            time2 = u.time
         if u.email not in weekly:
           condense = {
             "name": u.name,
             "email": u.email,
-            "time1": u.time.time(),
+            "time1": u.time,
             "time2": None
           }
 
           weekly[u.email] = condense
         else:
-          weekly[u.email]["time2"] = u.time.time()
+          weekly[u.email]["time2"] = u.time
 
     for email in weekly:
       person = weekly[email]
       if person["time2"] is not None:
         person_first = person["time1"]
-        # if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
-          # person_second = person["time2"]
-    #       if time2 is not None and time2 + DIFF > person_second and time2 - DIFF < person_second:
-    #         temp_here.append(email)
+        if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
+          person_second = person["time2"]
+          if time2 is not None and time2 + DIFF > person_second and time2 - DIFF < person_second:
+            temp_here.append(email)
 
     for email in PEOPLE:
       if email in temp_here:

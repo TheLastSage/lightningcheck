@@ -92,8 +92,7 @@
         data: JSON.stringify(data, null, '\t'),
         contentType: 'application/json;charset=UTF-8',
         success: function(result) {
-            document.getElementById("checkIn").innerText = "Sent " + email;
-            console.log("Sent!");
+            console.log("Sent " + email + "!");
         },
         complete: function(response) {
           console.log(response.responseText);

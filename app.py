@@ -192,7 +192,7 @@ def markhere():
       location = HALL
 
       date_arr = WEEKS[week].split("-")
-      date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]))
+      date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
       delta = timedelta(days=1)
 
       dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
@@ -203,7 +203,7 @@ def markhere():
         if q.email in ADMIN:
           admin_checks.append(q)
 
-      if len(admin_checks) > 2:
+      if len(admin_checks) != 2:
         return "Needs 2 Admin Check Ins", 200
 
       for check in admin_checks:

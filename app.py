@@ -21,6 +21,8 @@ utc = pytz.utc
 TIME_WINDOW= 1
 DIFF = timedelta(minutes=TIME_WINDOW)
 
+HALL = "Etcheverry Hall"
+
 WEEKS = {
   0: '2017-01-23',
   1: '2017-01-30',
@@ -162,6 +164,64 @@ def checkin():
 
     return redirect(url_for('index'))
 
+
+@app.route('/markhere', methods=['GET', 'POST'])
+def markhere():
+  if request.method == 'GET':
+    return redirect(url_for('index'))
+  elif request.method == 'POST':
+    email = request.json['email']
+    token = request.json['idtoken']
+    week = request.json['week']
+
+    try:
+      idinfo = client.verify_id_token(token, CLIENT_ID)
+
+      if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+          raise crypt.AppIdentityError("Wrong issuer.")
+
+      if idinfo['aud'] != CLIENT_ID:
+          raise crypt.AppIdentityError("Wrong Client.")
+
+      admin_email = idinfo['email']
+
+      if admin_email not in ADMIN:
+        return "Not Admin", 200
+
+      name = PEOPLE[email]
+      location = HALL
+
+      date_arr = WEEKS[week].split("-")
+      date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]))
+      delta = timedelta(days=1)
+
+      dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
+
+      admin_checks = []
+
+      for q in dayQs:
+        if q.email in ADMIN:
+          admin_checks.append(q)
+
+      if len(admin_checks) > 2:
+        return "Needs 2 Admin Check Ins", 200
+
+      for check in admin_checks:
+        time = check.time
+        u = CheckIn(name, email, location, time)
+        db.session.add(u)
+
+      db.session.commit()
+
+
+      return "Name: " + name + ", Email: " + email, 200
+    except crypt.AppIdentityError:
+      # Invalid token
+      return "OAuth Identity Error", 200
+
+    return redirect(url_for('index'))
+
+
 @app.route('/all', methods=['GET'])
 def all():
   check_ins = CheckIn.query.all()
@@ -187,7 +247,7 @@ def week_check(number):
       local = aware.astimezone(pst)
       u.time = local
 
-      if str(u.time.date()) == date and "Etcheverry Hall" in u.location:
+      if str(u.time.date()) == date and HALL in u.location:
         if u.email in ADMIN:
           if time1 is None:
             time1 = u.time

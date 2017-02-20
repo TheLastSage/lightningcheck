@@ -133,6 +133,7 @@ class CheckIn(db.Model):
 def index():
   return render_template('index.html')
 
+
 @app.route('/checkin', methods=['GET', 'POST'])
 def checkin():
   if request.method == 'GET':
@@ -231,6 +232,9 @@ def instructor():
 
       for q in dayQs:
         if q.email in ADMIN:
+          aware = utc.localize(q.time)
+          local = aware.astimezone(pst)
+          q.time = local
           convert = {
             'name': q.name,
             'email': q.email,

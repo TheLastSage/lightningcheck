@@ -205,16 +205,15 @@ def markhere():
           admin_checks.append(q)
 
         if q.email == email:
-          # db.session.remove(q)
-          nice = 1
+          db.session.delete(q)
 
-      # if len(admin_checks) <= 0:
-      #   return "Needs Admin Check Ins", 200
+      if len(admin_checks) <= 0:
+        return "Needs Admin Check Ins", 200
 
-      # for check in admin_checks:
-      #   time = check.time
-      #   u = CheckIn(name, email, location, time)
-      #   db.session.add(u)
+      for check in admin_checks:
+        time = check.time
+        u = CheckIn(name, email, location, time)
+        db.session.add(u)
 
       db.session.commit()
 

@@ -31,10 +31,12 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com">
 {% if week > 0}
-<a href="../week-{{ week - 1 }}" style="position: absolute; left: 2%; top: 2%;">Week {{ week - 1 }}</a>
+{% set pweek = week - 1 %}
+<a href="../week-{{ pweek }}" style="position: absolute; left: 2%; top: 2%;">Week {{ pweek }}</a>
 {% endif %}
 {% if week < 14 %}
-<a href="../week-{{ week + 1 }}" style="position: absolute; left: 2%; top: 2%;">Week {{ week + 1 }}</a>
+{% set nweek = week + 1 %}
+<a href="../week-{{ nweek }}" style="position: absolute; left: 2%; top: 2%;">Week {{ nweek }}</a>
 {% endif %}
 <div class="center_stuff">
   <h1>Week {{ week }}</h1>

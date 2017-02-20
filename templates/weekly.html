@@ -112,7 +112,7 @@
               var td1="<td>"+list[i]["name"]+"</td>";
               var td2="<td>"+list[i]["email"]+"</td>";
               var td3="<td>"+list[i]["time"]+"</td>";
-              var td4="<td><a href='#' onclick='remove("+list[i]["id"]+")'>Remove Check In</a></td></tr>";
+              var td4="<td><a href='#' onclick='removeEntry("+list[i]["id"]+")'>Remove Check In</a></td></tr>";
 
              $("#mytable").append(tr+td1+td2+td3+td4); 
 
@@ -160,7 +160,7 @@
     }
   }
 
-  function remove(id) {
+  function removeEntry(id) {
     console.log(id)
     if (email_temp) {
       var data = {

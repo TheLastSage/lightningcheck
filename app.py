@@ -235,10 +235,28 @@ def instructor():
           aware = utc.localize(q.time)
           local = aware.astimezone(pst)
           q.time = local
+
+          time = str(q.time.time())
+          pm = False
+
+          time_arr = time.split()
+          if int(time_arr[0]) > 12:
+            time_arr[0] = str(int(time_arr[0]) - 12)
+            pm = True
+          elif int(time_arr[0]) == 0:
+            time_arr[0] = str(12)
+
+          time = time_arr.join(":")
+
+          if pm:
+            time += " PM"
+          else
+            time += " AM"
+
           convert = {
             'name': q.name,
             'email': q.email,
-            'time': str(q.time.time()),
+            'time': time,
             'id': q.id
           }
           admin_checks.append(convert)

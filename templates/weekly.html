@@ -35,10 +35,8 @@
   <div id="signOut" class="element abcRioButton abcRioButtonLightBlue hidden div" style="height:36px;width:120px;" onclick="signOut();">
       <span href="#" style="font-size:13px;line-height:34px;" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</span>
   </div>
-  <div id="Instructor">
+  <div class="hidden_div" id="instructor">
     <h2 class="element" style="margin-top: 5%;">Instructor Check In's</h2>
-    <table id="CheckInTable" class="element">
-    </table>
   </div>
   <h2 class="element" style="margin-top: 5%;">Here</h2>
   <table class="element">
@@ -93,8 +91,22 @@
             console.log("Sent!");
         },
         complete: function(response) {
+          document.getElementById("instructor").classList.remove("hidden_div");
           var list = response.responseJSON["json_list"];
           console.log(list);
+
+          var tbl=$("<table/>").attr("id","mytable");
+          $("#instructor").append(tbl);
+          for(var i=0;i<obj.length;i++)
+          {
+              var tr="<tr>";
+              var td1="<td>"+obj[i]["name"]+"</td>";
+              var td2="<td>"+obj[i]["email"]+"</td>";
+              var td3="<td>"+obj[i]["time"]+"</td></tr>";
+
+             $("#mytable").append(tr+td1+td2+td3); 
+
+          } 
         }
       });
     }
@@ -105,6 +117,7 @@
     auth2.signOut().then(function () {
         console.log('User signed out.');
         document.getElementById("signOut").classList.add("hidden_div");
+        document.getElementById("instructor").classList.add("hidden_div");
       prof_id = null;
       email_temp = false;
     });

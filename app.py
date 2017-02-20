@@ -393,7 +393,7 @@ def week_check(number):
     here.sort()
     absent.sort()
 
-    return render_template("weekly.html", week=number, here=here, absent=absent, nweek=str(int(number)+1), pweek=str(int(number)+1))
+    return render_template("weekly.html", week=number, here=here, absent=absent, nweek=str(int(number)+1), pweek=str(int(number)-1))
 
 
 if __name__ == '__main__':

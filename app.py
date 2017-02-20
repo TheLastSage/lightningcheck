@@ -131,7 +131,7 @@ class CheckIn(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  today = datetime.now(tzinfo=pst).date()
+  today = datetime.now(tz=pst).date()
   curr = 0
   for week in WEEKS:
     week_arr = week.split("-")

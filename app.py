@@ -90,13 +90,13 @@ PEOPLE = {
   "kthvar@berkeley.edu": "Keshav Thvar",
   "nicoletsai@berkeley.edu": "Nicole Tsai",
   "jessiewang3@berkeley.edu": "Jessie Wang",
-  "NEEDS EMAIL": "William Wang",
+  "william.m.wang@berkeley.edu": "William Wang",
   "thomas.warloe@berkeley.edu": "Thomas Warloe",
   "serenawu95@berkeley.edu": "Serena Wu",
   "kenny.hyun@berkeley.edu": "Kenny Yoo",
   "carolzhang@berkeley.edu": "Carol Zhang",
   "zhangzhao@berkeley.edu": "Zhao Zhang",
-  "NEEDS EMAIL": "Zhe Zhang"
+  "zhengyu_zhang@berkeley.edu": "Zhe Zhang"
 }
 
 # Including ME in the admin list for testing, remove before final!

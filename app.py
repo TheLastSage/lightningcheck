@@ -218,8 +218,7 @@ def markhere():
       db.session.commit()
 
 
-      # return "Name: " + name + ", Email: " + email, 200
-      return "testing", 200
+      return "Name: " + name + ", Email: " + email, 200
     except crypt.AppIdentityError:
       # Invalid token
       return "OAuth Identity Error", 200

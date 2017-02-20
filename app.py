@@ -246,7 +246,7 @@ def instructor():
           elif int(time_arr[0]) == 0:
             time_arr[0] = str(12)
 
-          time = time_arr.join(":")
+          time = ":".join(time_arr)
 
           if pm:
             time += " PM"

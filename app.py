@@ -166,11 +166,38 @@ def checkin():
     return redirect(url_for('index'))
 
 
-# @app.route('/remove', methods=['GET', 'POST'])
-# def remove():
-#   if request.method == 'GET':
-#     return redirect(url_for('index'))
-#   elif request.method == 'POST':
+@app.route('/remove', methods=['GET', 'POST'])
+def remove():
+  if request.method == 'GET':
+    return redirect(url_for('index'))
+  elif request.method == 'POST':
+    token = request.json['idtoken']
+    row = request.json['id']
+    try:
+      idinfo = client.verify_id_token(token, CLIENT_ID)
+
+      if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+          raise crypt.AppIdentityError("Wrong issuer.")
+
+      if idinfo['aud'] != CLIENT_ID:
+          raise crypt.AppIdentityError("Wrong Client.")
+
+      admin_email = idinfo['email']
+
+      if admin_email not in ADMIN:
+        return "Not Admin", 200
+
+      query = CheckIn.query.filter(CheckIn.id == row).first()
+
+      db.session.delete(query)
+      db.session.commit()
+
+      return "Removed: " + str(id), 200
+    except crypt.AppIdentityError:
+      # Invalid token
+      return "OAuth Identity Error", 200
+
+    return redirect(url_for('index'))
 
 
 @app.route('/instructor', methods=['GET', 'POST'])

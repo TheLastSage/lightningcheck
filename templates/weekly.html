@@ -103,8 +103,9 @@
               var td1="<td>"+list[i]["name"]+"</td>";
               var td2="<td>"+list[i]["email"]+"</td>";
               var td3="<td>"+list[i]["time"]+"</td></tr>";
+              var td4="<td><a href='#' onclick='remove("+list[i]["id"]+")'>Remove Check In</a></td></tr>";
 
-             $("#mytable").append(tr+td1+td2+td3); 
+             $("#mytable").append(tr+td1+td2+td3+td4); 
 
           } 
         }
@@ -139,6 +140,31 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(result) {
             console.log("Sent " + email + "!");
+        },
+        complete: function(response) {
+          console.log(response.responseText);
+          location.reload();
+        }
+      });
+    } else {
+      alert("Only Instructors can mark as Here!");
+    }
+  }
+
+  function remove(id) {
+    if (email_temp) {
+      var data = {
+        'id': id,
+        'idtoken': prof_id
+      };
+
+      $.ajax({
+        type : "POST",
+        url : "../remove",
+        data: JSON.stringify(data, null, '\t'),
+        contentType: 'application/json;charset=UTF-8',
+        success: function(result) {
+            console.log("Removed!");
         },
         complete: function(response) {
           console.log(response.responseText);

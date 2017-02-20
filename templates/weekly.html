@@ -97,12 +97,12 @@
 
           var tbl=$("<table/>").attr("id","mytable");
           $("#instructor").append(tbl);
-          for(var i=0;i<obj.length;i++)
+          for(var i=0;i<list.length;i++)
           {
               var tr="<tr>";
-              var td1="<td>"+obj[i]["name"]+"</td>";
-              var td2="<td>"+obj[i]["email"]+"</td>";
-              var td3="<td>"+obj[i]["time"]+"</td></tr>";
+              var td1="<td>"+list[i]["name"]+"</td>";
+              var td2="<td>"+list[i]["email"]+"</td>";
+              var td3="<td>"+list[i]["time"]+"</td></tr>";
 
              $("#mytable").append(tr+td1+td2+td3); 
 

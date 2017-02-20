@@ -237,14 +237,14 @@ def instructor():
           q.time = local
 
           time = str(q.time.time())
-          # pm = False
+          pm = False
 
-          # time_arr = time.split()
-          # if int(time_arr[0]) > 12:
-          #   time_arr[0] = str(int(time_arr[0]) - 12)
-          #   pm = True
-          # elif int(time_arr[0]) == 0:
-          #   time_arr[0] = str(12)
+          time_arr = time.split()
+          if int(time_arr[0]) > 12:
+            time_arr[0] = str(int(time_arr[0]) - 12)
+            pm = True
+          elif int(time_arr[0]) == 0:
+            time_arr[0] = str(12)
 
           # time = ":".join(time_arr)
 

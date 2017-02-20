@@ -20,6 +20,7 @@ pst = pytz.timezone('America/Los_Angeles')
 utc = pytz.utc
 TIME_WINDOW= 1
 DIFF = timedelta(minutes=TIME_WINDOW)
+BOT_CHECK = 50
 
 HALL = "Etcheverry Hall"
 
@@ -243,8 +244,7 @@ def week_check(number):
     temp_here = []
     here  = []
     absent = []
-    time1 = None
-    time2 = None
+    times = []
     for u in check_ins:
       aware = utc.localize(u.time)
       local = aware.astimezone(pst)
@@ -252,30 +252,33 @@ def week_check(number):
 
       if str(u.time.date()) == date and HALL in u.location:
         if u.email in ADMIN:
-          if time1 is None:
-            time1 = u.time
-          else:
-            time2 = u.time
+          times.append(u.time)
         if u.email not in weekly:
+          u_times = []
+          u_times.append(u.time)
           condense = {
             "name": u.name,
             "email": u.email,
-            "time1": u.time,
-            "time2": None
+            "times": u_times,
+            "checkins": 0
           }
 
           weekly[u.email] = condense
         else:
-          weekly[u.email]["time2"] = u.time
+          weekly[u.email]["times"].append(u.time)
 
     for email in weekly:
       person = weekly[email]
-      if person["time2"] is not None:
-        person_first = person["time1"]
-        if time1 is not None and time1 + DIFF > person_first and time1 - DIFF < person_first:
-          person_second = person["time2"]
-          if time2 is not None and time2 + DIFF > person_second and time2 - DIFF < person_second:
-            temp_here.append(email)
+      time_copy = times[:]
+      if len(person["times"]) <= BOT_CHECK:
+        for u_time in person["times"]:
+          for time in time_copy:
+            if u_time < time + DIFF and u_time > time - DIFF:
+              person["checkins"] += 1
+              time_copy.remove(time)
+
+      if person["checkins"] == len(times):
+        temp_here.append(email)
 
     for email in PEOPLE:
       if email in temp_here:

@@ -31,7 +31,7 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com">
 <div>
-{% if week > 0 %}
+{% if week != "0" %}
   <a href="../week-{{ pweek }}" style="position: absolute; left: 2%; top: 2%;">Week {{ pweek }}</a>
 {% endif %}
   <a href="../week-{{ nweek }}" style="position: absolute; right: 2%; top: 2%;">Week {{ nweek }}</a>

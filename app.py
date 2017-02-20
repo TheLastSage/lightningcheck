@@ -204,7 +204,13 @@ def instructor():
 
       for q in dayQs:
         if q.email in ADMIN:
-          admin_checks.append(q)
+          convert = {
+            'name': q.name,
+            'email': q.email,
+            'time': str(q.time),
+            'id': q.id
+          }
+          admin_checks.append(convert)
 
       return jsonify(json_list=admin_checks)
       # return "testing", 200

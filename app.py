@@ -134,7 +134,7 @@ def index():
   today = datetime.now(tz=pst).date()
   curr = 0
   for week in WEEKS:
-    week_arr = week.split("-")
+    week_arr = WEEKS[week].split("-")
     date = datetime(week_arr[0], week_arr[1], week_arr[2], tzinfo=pst)
     if today > date:
       curr = week

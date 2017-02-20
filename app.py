@@ -205,7 +205,8 @@ def markhere():
           admin_checks.append(q)
 
         if q.email == email:
-          db.session.remove(q)
+          # db.session.remove(q)
+          nice = 1
 
       # if len(admin_checks) <= 0:
       #   return "Needs Admin Check Ins", 200

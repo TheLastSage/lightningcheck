@@ -95,7 +95,7 @@
           var list = response.responseJSON["json_list"];
           console.log(list);
 
-          var tbl=$("<table/>").attr("id","mytable");
+          var tbl=$("<table/>").attr("id","mytable").attr("class", "element");
           $("#instructor").append(tbl);
           for(var i=0;i<list.length;i++)
           {

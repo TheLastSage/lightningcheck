@@ -37,7 +37,7 @@
     	<img style="position: relative;" src="static/button.png">
     	<span onclick="findSelf()" class="abcRioButtonContentWrapper" style="font-size: 2vh;line-height:34px; position: absolute; width: 100%; margin: 5px auto; left: 0; color: white;">Check In</span>
 	</div>
-	<div class="element" id="checkIn"></div>
+	<div class="element hidden_div" id="checkIn"></div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -112,6 +112,8 @@
 		document.getElementById("info").classList.remove("hidden_div");
 		document.getElementById("signOut").classList.remove("hidden_div");
 		document.getElementById("checkInButton").classList.remove("hidden_div");
+		document.getElementById("checkIn").classList.remove("hidden_div");
+
 
 
 		prof_id = googleUser.getAuthResponse().id_token;
@@ -127,6 +129,8 @@
 			document.getElementById("info").classList.add("hidden_div");
 			document.getElementById("signOut").classList.add("hidden_div");
 			document.getElementById("checkInButton").classList.add("hidden_div");
+			document.getElementById("checkIn").classList.add("hidden_div");
+
 
 			prof_id = null;
 			email_temp = false;

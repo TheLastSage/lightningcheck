@@ -31,11 +31,11 @@
 		<div id="email"></div>
 	</div>
 	<div id="signOut" onclick="signOut();" class="element abcRioButton abcRioButtonLightBlue hidden_div" style="height:36px;width:120px;">
-		<span href="#" style="font-size:13px;line-height:34px;" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</span>
+		<span href="#" style="font-size:13px;line-height:34px;" class="abcRioButtonContentWrapper">Sign out</span>
 	</div>
     <div id="checkInButton" class="element hidden_div" onclick="findSelf()">
     	<img style="position: relative;" src="static/button.png">
-    	<span onclick="findSelf()" class="abcRioButtonContentWrapper" style="font-size: 2vh;line-height:34px; position: absolute; width: 100%; margin: 5px auto; left: 0; color: white;">Check In</span>
+    	<span class="abcRioButtonContentWrapper" style="font-size: 2vh;line-height:34px; position: absolute; width: 100%; margin: 5px auto; left: 0; color: white;">Check In</span>
 	</div>
 	<div class="element hidden_div" id="checkIn"></div>
 </div>
@@ -130,7 +130,7 @@
 			document.getElementById("signOut").classList.add("hidden_div");
 			document.getElementById("checkInButton").classList.add("hidden_div");
 			document.getElementById("checkIn").classList.add("hidden_div");
-
+			document.getElementById("checkIn").classList.remove("hidden_div");
 
 			prof_id = null;
 			email_temp = false;

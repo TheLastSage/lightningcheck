@@ -184,41 +184,42 @@ def markhere():
       if idinfo['aud'] != CLIENT_ID:
           raise crypt.AppIdentityError("Wrong Client.")
 
-      admin_email = idinfo['email']
+      # admin_email = idinfo['email']
 
-      if admin_email not in ADMIN:
-        return "Not Admin", 200
+      # if admin_email not in ADMIN:
+      #   return "Not Admin", 200
 
-      name = PEOPLE[email]
-      location = HALL
+      # name = PEOPLE[email]
+      # location = HALL
 
-      date_arr = WEEKS[week].split("-")
-      date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
-      delta = timedelta(days=1)
+      # date_arr = WEEKS[week].split("-")
+      # date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
+      # delta = timedelta(days=1)
 
-      dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
+      # dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
 
-      admin_checks = []
+      # admin_checks = []
 
-      for q in dayQs:
-        if q.email in ADMIN:
-          admin_checks.append(q)
+      # for q in dayQs:
+      #   if q.email in ADMIN:
+      #     admin_checks.append(q)
 
-        if q.email == email:
-          db.session.remove(q)
+      #   if q.email == email:
+      #     db.session.remove(q)
 
-      if len(admin_checks) <= 0:
-        return "Needs Admin Check Ins", 200
+      # if len(admin_checks) <= 0:
+      #   return "Needs Admin Check Ins", 200
 
-      for check in admin_checks:
-        time = check.time
-        u = CheckIn(name, email, location, time)
-        db.session.add(u)
+      # for check in admin_checks:
+      #   time = check.time
+      #   u = CheckIn(name, email, location, time)
+      #   db.session.add(u)
 
       db.session.commit()
 
 
-      return "Name: " + name + ", Email: " + email, 200
+      # return "Name: " + name + ", Email: " + email, 200
+      return "testing", 200
     except crypt.AppIdentityError:
       # Invalid token
       return "OAuth Identity Error", 200

@@ -198,17 +198,17 @@ def markhere():
 
       dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
 
-      # admin_checks = []
+      admin_checks = []
 
-      # for q in dayQs:
-      #   if q.email in ADMIN:
-      #     admin_checks.append(q)
+      for q in dayQs:
+        if q.email in ADMIN:
+          admin_checks.append(q)
 
-      #   if q.email == email:
-      #     db.session.remove(q)
+        if q.email == email:
+          db.session.remove(q)
 
-      # if len(admin_checks) <= 0:
-      #   return "Needs Admin Check Ins", 200
+      if len(admin_checks) <= 0:
+        return "Needs Admin Check Ins", 200
 
       # for check in admin_checks:
       #   time = check.time

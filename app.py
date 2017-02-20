@@ -196,7 +196,7 @@ def markhere():
       date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
       delta = timedelta(days=1)
 
-      # dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
+      dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
 
       # admin_checks = []
 

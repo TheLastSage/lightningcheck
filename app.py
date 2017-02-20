@@ -184,17 +184,17 @@ def markhere():
       if idinfo['aud'] != CLIENT_ID:
           raise crypt.AppIdentityError("Wrong Client.")
 
-      # admin_email = idinfo['email']
+      admin_email = idinfo['email']
 
-      # if admin_email not in ADMIN:
-      #   return "Not Admin", 200
+      if admin_email not in ADMIN:
+        return "Not Admin", 200
 
-      # name = PEOPLE[email]
-      # location = HALL
+      name = PEOPLE[email]
+      location = HALL
 
-      # date_arr = WEEKS[week].split("-")
-      # date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
-      # delta = timedelta(days=1)
+      date_arr = WEEKS[week].split("-")
+      date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
+      delta = timedelta(days=1)
 
       # dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
 

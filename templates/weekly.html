@@ -30,9 +30,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="22643870492-3k4q6eqkdunpp447em29su6e7b7te235.apps.googleusercontent.com">
-{% set pweek = week - 1 %}
+{% set pweek = int(week) - 1 %}
 <a href="../week-{{ pweek }}" style="position: absolute; left: 2%; top: 2%;">Week {{ pweek }}</a>
-{% set nweek = week + 1 %}
+{% set nweek = int(week) + 1 %}
 <a href="../week-{{ nweek }}" style="position: absolute; right: 2%; top: 2%;">Week {{ nweek }}</a>
 <div class="center_stuff">
   <h1>Week {{ week }}</h1>

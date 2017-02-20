@@ -12,7 +12,7 @@
   }
 
   .hidden_div {
-  	visibility: hidden;
+  	display: none;
   }
 
   .element {
@@ -21,17 +21,18 @@
   }
 
 </style>
+<div id="signOut" onclick="signOut();" class="abcRioButton abcRioButtonLightBlue hidden_div" style="height:36px;width:120px; position: absolute; top: 2%; right: 2%;">
+		<span href="#" style="font-size:13px;line-height:34px;" class="abcRioButtonContentWrapper">Sign out</span>
+</div>
+<a href="../week-{{ week }}" style="position: absolute; left: 2%; top: 2%;" class="abcRioButton abcRioButtonLightBlue">Check Attendance</a>
 <div class="center_stuff">
 	<img src="/static/icon.png">
 	<p style="font-size: 3vh;" class="element">Bear Check In</p>
 	<img class="element" style="width: 80%;" src="/static/alpinebear_behance1.jpg">
-	<div class="g-signin2" data-onsuccess="onSignIn" style="width: 120px; margin: 10px auto;"></div>
+	<div id="signIn" class="g-signin2" data-onsuccess="onSignIn" style="width: 120px; margin: 10px auto;"></div>
 	<div id="info" class="hidden_div element">
 		<div id="name"></div>
 		<div id="email"></div>
-	</div>
-	<div id="signOut" onclick="signOut();" class="element abcRioButton abcRioButtonLightBlue hidden_div" style="height:36px;width:120px;">
-		<span href="#" style="font-size:13px;line-height:34px;" class="abcRioButtonContentWrapper">Sign out</span>
 	</div>
     <div id="checkInButton" class="element hidden_div" onclick="findSelf()">
     	<img style="position: relative;" src="static/button.png">
@@ -113,7 +114,7 @@
 		document.getElementById("signOut").classList.remove("hidden_div");
 		document.getElementById("checkInButton").classList.remove("hidden_div");
 		document.getElementById("checkIn").classList.remove("hidden_div");
-
+        document.getElementById("signIn").classList.add("hidden_div");
 
 
 		prof_id = googleUser.getAuthResponse().id_token;
@@ -130,7 +131,7 @@
 			document.getElementById("signOut").classList.add("hidden_div");
 			document.getElementById("checkInButton").classList.add("hidden_div");
 			document.getElementById("checkIn").classList.add("hidden_div");
-			document.getElementById("checkIn").classList.remove("hidden_div");
+			document.getElementById("signIn").classList.remove("hidden_div");
 
 			prof_id = null;
 			email_temp = false;

@@ -206,8 +206,8 @@ def instructor():
         if q.email in ADMIN:
           admin_checks.append(q)
 
-      # return jsonify(admin_checks)
-      return "testing", 200
+      return jsonify(json_list=admin_checks)
+      # return "testing", 200
     except crypt.AppIdentityError:
       # Invalid token
       return "OAuth Identity Error", 200

@@ -35,6 +35,11 @@
   <div id="signOut" class="element abcRioButton abcRioButtonLightBlue hidden div" style="height:36px;width:120px;" onclick="signOut();">
       <span href="#" style="font-size:13px;line-height:34px;" onclick="signOut();" class="abcRioButtonContentWrapper">Sign out</span>
   </div>
+  <div id="Instructor">
+    <h2 class="element" style="margin-top: 5%;">Instructor Check In's</h2>
+    <table id="CheckInTable" class="element">
+    </table>
+  </div>
   <h2 class="element" style="margin-top: 5%;">Here</h2>
   <table class="element">
     {% for u in here %}
@@ -70,9 +75,27 @@
     var profile = googleUser.getBasicProfile();
     console.log(profile.getEmail());
     prof_id = googleUser.getAuthResponse().id_token;
+    document.getElementById("signOut").classList.remove("hidden_div");
     if (admin.indexOf(profile.getEmail()) >= 0) {
       email_temp = true;
-      document.getElementById("signOut").classList.remove("hidden_div");
+
+      var data = {
+        'idtoken': prof_id,
+        'week': {{ week }}
+      };
+
+      $.ajax({
+        type : "POST",
+        url : "../instructor",
+        data: JSON.stringify(data, null, '\t'),
+        contentType: 'application/json;charset=UTF-8',
+        success: function(result) {
+            console.log("Sent!");
+        },
+        complete: function(response) {
+          console.log(response);
+        }
+      });
     }
   }
 
@@ -93,7 +116,7 @@
         'email': email,
         'week': {{ week }},
         'idtoken': prof_id
-      }
+      };
 
       $.ajax({
         type : "POST",

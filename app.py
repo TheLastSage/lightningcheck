@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from oauth2client import client, crypt
 from datetime import datetime, timedelta
@@ -165,6 +165,53 @@ def checkin():
 
     return redirect(url_for('index'))
 
+
+# @app.route('/remove', methods=['GET', 'POST'])
+# def remove():
+#   if request.method == 'GET':
+#     return redirect(url_for('index'))
+#   elif request.method == 'POST':
+
+
+@app.route('/instructor', methods=['GET', 'POST'])
+def instructor():
+  if request.method == 'GET':
+    return redirect(url_for('index'))
+  elif request.method == 'POST':
+    token = request.json['idtoken']
+    week = request.json['week']
+    try:
+      idinfo = client.verify_id_token(token, CLIENT_ID)
+
+      if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+          raise crypt.AppIdentityError("Wrong issuer.")
+
+      if idinfo['aud'] != CLIENT_ID:
+          raise crypt.AppIdentityError("Wrong Client.")
+
+      admin_email = idinfo['email']
+
+      if admin_email not in ADMIN:
+        return "Not Admin", 200
+
+      date_arr = WEEKS[week].split("-")
+      date = datetime(int(date_arr[0]), int(date_arr[1]), int(date_arr[2]), tzinfo=pst)
+      delta = timedelta(days=1)
+
+      dayQs = CheckIn.query.filter(CheckIn.time > date).filter(CheckIn.time < date + delta).all()
+
+      admin_checks = []
+
+      for q in dayQs:
+        if q.email in ADMIN:
+          admin_checks.append(q)
+
+      return jsonify(admin_checks)
+    except crypt.AppIdentityError:
+      # Invalid token
+      return "OAuth Identity Error", 200
+
+    return redirect(url_for('index'))
 
 @app.route('/markhere', methods=['GET', 'POST'])
 def markhere():

@@ -131,7 +131,15 @@ class CheckIn(db.Model):
 
 @app.route('/', methods=['GET'])
 def index():
-  return render_template('index.html')
+  today = datetime.now(tzinfo=pst).date()
+  curr = 0
+  for week in WEEKS:
+    week_arr = week.split("-")
+    date = datetime(week_arr[0], week_arr[1], week_arr[2], tzinfo=pst)
+    if today > date:
+      curr = week
+
+  return render_template('index.html', week=curr)
 
 
 @app.route('/checkin', methods=['GET', 'POST'])

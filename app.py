@@ -204,11 +204,11 @@ def markhere():
         if q.email in ADMIN:
           admin_checks.append(q)
 
-        if q.email == email:
-          db.session.remove(q)
+      #   if q.email == email:
+      #     db.session.remove(q)
 
-      if len(admin_checks) <= 0:
-        return "Needs Admin Check Ins", 200
+      # if len(admin_checks) <= 0:
+      #   return "Needs Admin Check Ins", 200
 
       # for check in admin_checks:
       #   time = check.time

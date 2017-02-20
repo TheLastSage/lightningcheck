@@ -238,7 +238,7 @@ def instructor():
           convert = {
             'name': q.name,
             'email': q.email,
-            'time': str(q.time),
+            'time': str(q.time.time()),
             'id': q.id
           }
           admin_checks.append(convert)

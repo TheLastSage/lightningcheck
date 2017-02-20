@@ -206,12 +206,14 @@ def instructor():
         if q.email in ADMIN:
           admin_checks.append(q)
 
-      return jsonify(admin_checks)
+      # return jsonify(admin_checks)
+      return "testing", 200
     except crypt.AppIdentityError:
       # Invalid token
       return "OAuth Identity Error", 200
 
     return redirect(url_for('index'))
+
 
 @app.route('/markhere', methods=['GET', 'POST'])
 def markhere():

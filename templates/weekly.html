@@ -93,7 +93,8 @@
             console.log("Sent!");
         },
         complete: function(response) {
-          console.log(response.responseJSON);
+          var list = response.responseJSON["json_list"];
+          console.log(list);
         }
       });
     }

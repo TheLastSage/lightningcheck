@@ -250,7 +250,7 @@ def instructor():
 
           if pm:
             time += " PM"
-          else
+          else:
             time += " AM"
 
           convert = {
